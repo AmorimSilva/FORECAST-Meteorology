@@ -1,0 +1,39 @@
+rm(list=ls())
+dados <- read.table("/home/Samuel/dados.csv",
+                   sep = ";", dec="," , header = T, stringsAsFactors=FALSE)
+# temepratura potencial
+plot(dados$temp0,dados$altura_geo, type='b', log="y", pch=20, col='red3',
+     ylab="altitude (m)", xlab="temperatura (°C)", main = "Temperatura Potencial")
+grid(nx=20, ny=20, col='darkgrey')
+# intensidade do vento (m/s)
+plot(dados$Wind_Spd,dados$altura_geo, type='b', log="y", pch=20, col='green',
+     ylab="altitude (m)", xlab="vento (m/s)", main = "Intensidade do Vento")
+# Ozonio 
+plot(dados$O3_mPa,dados$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (O3)", main = "Concentração de Ozônio")
+plot(dados$O3_ppmv,dados$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (ppmv)", main = "Concentração de Ozônio")
+plot(dados$O3_DU,dados$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (DU)", main = "Concentração de Ozônio")
+####### para 3000 m
+dados2 <- read.table("/home/Samuel/dados2.csv",
+                    sep = ";", dec="," , header = T, stringsAsFactors=FALSE)
+# temepratura potencial
+plot(dados2$temp0,dados2$altura_geo, type='b', log="y", pch=20, col='red3',
+     ylab="altitude (m)", xlab="temperatura (°C)", main = "Temperatura Potencial")
+grid(nx=20, ny=20, col='darkgrey')
+# intensidade do vento (m/s)
+plot(dados2$Wind_Spd,dados2$altura_geo, type='b', log="y", pch=20, col='green',
+     ylab="altitude (m)", xlab="vento (m/s)", main = "Intensidade do Vento")
+# Ozonio 
+plot(dados2$O3_mPa,dados2$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (O3)", main = "Concentração de Ozônio")
+plot(dados2$O3_ppmv,dados2$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (ppmv)", main = "Concentração de Ozônio")
+plot(dados2$O3_DU,dados2$altura_geo, type='b', log="y", pch=20, col='orange',
+     ylab="altitude (m)", xlab="Ozônio (DU)", main = "Concentração de Ozônio")
+__________________________________________________________________________________________________
+rm(list=ls())
+dados <- read.table("/home/Samuel/testeE.txt", dec="," , header = T, stringsAsFactors=FALSE)
+plot(dados$Temp,dados$GeopAlt, type='b', log="y", pch=20, col='green',
+     ylab="altitude (m)", xlab="temperature (°C)", main = " potencial temperature")
