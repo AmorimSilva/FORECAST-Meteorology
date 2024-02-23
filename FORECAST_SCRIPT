@@ -1,0 +1,73 @@
+
+library(forecast)
+library(fpp2)
+
+prec <- c(46,75,84.9,58.3,75.7,16.5,42.45,6.3,28.8,14.5,21.95,33.3,24.6)
+
+
+plot(prec)
+
+# suaviza��o exponencial simples
+
+prev_prec <- ses(prec, h = 15) # Previsao para os pr�ximos 15 anos
+summary(prev_prec)
+plot(prev_prec) 
+
+# holt
+
+prev_prec_holt <- holt(prec, h = 5) # Previsao para os pr�ximos 5 anos
+summary(prev_prec_holt)
+autoplot(prev_prec_holt)
+
+# holt + damp
+
+prev_prec_holt = holt(prec, h = 5, PI = F)
+prev_prec_holt_damp = holt(prec, h = 5, damped = T, PI = F) # Previsao para os pr�ximos 5 anos
+autoplot(prec) + 
+  autolayer(prev_prec_holt, series="Holt Linear") + 
+  autolayer(prev_prec_holt_damp, series="Holt com Damp")
+
+# Holt-Winters
+# m�todo de suaviza��o exponencial tripla
+
+# aditivo � adequado quando a amplitude dos ciclos
+# de sazonalidade n�o est� correlacionada ao tempo
+
+# multiplicativo � adequado quando a amplitude dos ciclos
+# de sazonalidade est� correlacionado ao tempo
+
+autoplot(gas) + ylab("Consumo de gal�es de g�s")
+
+# aditivo
+
+prev_gas_aditivo <- hw(gas, seasonal = "additive", PI = F)
+
+summary(prev_gas_aditivo)
+# multiplicativo
+
+prev_gas_mult <- hw(gas,
+                    seasonal = "multiplicative", PI = F)
+summary(prev_gas_mult)
+
+autoplot(gas) +
+  autolayer(prev_gas_aditivo, series = "HW Add.")+
+  autolayer(prev_gas_mult, series = "HW mult.")
+
+# ARIMA
+
+arima_prec <- auto.arima(prec)
+
+autoplot(forecast(arima_prec))
+
+# NAIVE
+
+previsao <- naive(prec)
+
+autoplot(prec, series = "observados") +
+  autolayer(fitted(previsao), series = "previs�o")
+
+# observando os erros
+
+autoplot(residuals(previsao))
+
+checkresiduals(previsao)
